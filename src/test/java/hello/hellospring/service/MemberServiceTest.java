@@ -39,7 +39,7 @@ class MemberServiceTest {
         // then
         Member findMember = memberService.findOne(saveId).get();
         Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
-        System.out.println("findMember.getId() = " + findMember.getMemberId());
+        System.out.println("findMember.getId() = " + findMember.getMemberCode());
     }
 
     @Test

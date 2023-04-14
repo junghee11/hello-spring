@@ -28,6 +28,9 @@ public class MemberController {
     public String create(MemberForm form) {
         Member member = new Member();
         member.setName(form.getName());
+        member.setMemberId(form.getMemberId());
+        member.setMemberPw(form.getMemberPw());
+        member.setMemberSalt(form.getMemberSalt());
 
         System.out.println("member = " + member.getName());
 

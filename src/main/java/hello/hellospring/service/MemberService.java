@@ -25,7 +25,7 @@ public class MemberService {
     public Long join(Member member) {
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
-        return member.getMemberId();
+        return member.getMemberCode();
     }
 
     private void validateDuplicateMember(Member member) {
@@ -42,7 +42,7 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Optional<Member> findOne(Long memberId) {
-        return memberRepository.findById(memberId);
+    public Optional<Member> findOne(Long memberCode) {
+        return memberRepository.findById(memberCode);
     }
 }

@@ -1,21 +1,29 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JpaMemberRepository implements MemberRepository {
 
+    @PersistenceContext
     private final EntityManager em;
 
+    @Autowired
     public JpaMemberRepository(EntityManager em) {
         this.em = em;
     }
 
     @Override
     public Member save(Member member) {
+        System.out.println("member = " + member);
         em.persist(member);
         return member;
     }
@@ -28,7 +36,7 @@ public class JpaMemberRepository implements MemberRepository {
 
     @Override
     public Optional<Member> findByName(String name) {
-        List<Member> result = em.createQuery("select m from member m where m.name = :name", Member.class)
+        List<Member> result = em.createQuery("select m from Member m where m.name = :name", Member.class)
                 .setParameter("name", name)
                 .getResultList();
         return result.stream().findAny();
@@ -36,7 +44,7 @@ public class JpaMemberRepository implements MemberRepository {
 
     @Override
     public List<Member> findAll() {
-        return em.createQuery("select m from member m", Member.class)
+        return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 }

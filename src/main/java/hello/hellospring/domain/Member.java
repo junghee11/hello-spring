@@ -1,24 +1,23 @@
 package hello.hellospring.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name="member")
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long memberCode;
 
     @Column(name = "memberName")
     private String name;
 
-    public Long getMemberId() {
-        return memberId;
+    public Long getMemberCode() {
+        return memberCode;
     }
 
-    public void setMemberId(Long id) {
-        this.memberId = memberId;
+    public void setMemberCode(Long memberCode) {
+        this.memberCode = memberCode;
     }
 
     public String getName() {
@@ -27,5 +26,35 @@ public class Member {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private String memberId;
+
+    private String memberPw;
+
+    private String memberSalt;
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberPw() {
+        return memberPw;
+    }
+
+    public void setMemberPw(String memberPw) {
+        this.memberPw = memberPw;
+    }
+
+    public String getMemberSalt() {
+        return memberSalt;
+    }
+
+    public void setMemberSalt(String memberSalt) {
+        this.memberSalt = memberSalt;
     }
 }

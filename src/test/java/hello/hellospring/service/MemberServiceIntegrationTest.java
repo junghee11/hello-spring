@@ -9,11 +9,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@Transactional
 class MemberServiceIntegrationTest {
 
     @Autowired MemberService memberService;
@@ -23,7 +27,10 @@ class MemberServiceIntegrationTest {
     void join() {
         // given
         Member member = new Member();
-        member.setName("hello");
+        member.setName("zenguygguihbia");
+        member.setMemberId("fwiafhioawhfiwhg");
+        member.setMemberPw("wfoiejiowjafowfaw");
+        member.setMemberSalt("awhfiwhifhiawfhw");
 
         // when
         Long saveId = memberService.join(member);
@@ -31,7 +38,7 @@ class MemberServiceIntegrationTest {
         // then
         Member findMember = memberService.findOne(saveId).get();
         Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
-        System.out.println("findMember.getId() = " + findMember.getMemberId());
+        System.out.println("findMember.getMemberCode() = " + findMember.getMemberCode());
     }
 
     @Test
@@ -39,9 +46,15 @@ class MemberServiceIntegrationTest {
         //given
         Member member1 = new Member();
         member1.setName("spring1");
+        member1.setMemberId("fwiafhioawhfiwhg1");
+        member1.setMemberPw("wfoiejiowjafowfaw1");
+        member1.setMemberSalt("awhfiwhifhiawfhw1");
 
         Member member2 = new Member();
-        member2.setName("spring2");
+        member2.setName("spring1");
+        member2.setMemberId("fwiafhioawhfiwhg2");
+        member2.setMemberPw("wfoiejiowjafowfaw2");
+        member2.setMemberSalt("awhfiwhifhiawfhw2");
 
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
